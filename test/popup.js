@@ -6,6 +6,6 @@ chrome.tabs.executeScript( {
 			'api_key': 'ae63f26c7f98d4b206d13c7779ad104c',
 			'data': selection[0],
 			'threshold': .01
-		}), function(res){alert(res)});
+		})).then(function(res){document.write(res)});
 });
 
