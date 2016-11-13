@@ -1,7 +1,7 @@
 {
- "name": "Selected Text",
- "version": "0.1",
- "description": "Selected Text",
+ "name": "Article Bias",
+ "version": "1.0",
+ "description": "See the political affiliation of articles.",
  "manifest_version": 2,
  "browser_action": {
    "default_title": "Selected Text",
@@ -10,6 +10,12 @@
  "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js",
-    "https://apiv2.indico.io/political"
-]
+    "https://apiv2.indico.io/political",
+    "https://www.gstatic.com/charts/45/loader.js"
+],
+"icons": {
+	"16": "Judge.png",
+	"48": "Judge.png",
+	"128": "Judge.png"
+}
 }

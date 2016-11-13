@@ -1,3 +1,4 @@
+
 chrome.tabs.executeScript( {
   code: "window.getSelection().toString();"
 }, function(selection) {
@@ -7,28 +8,31 @@ chrome.tabs.executeScript( {
 			'data': selection[0],
 			'threshold': 0
 		})).then(function(res){
-			var results = $.parseJSON(res).results
-			google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
+			var results = $.parseJSON(res).results;
+			var ctx = document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+			    type: 'pie',
+			    data: {
+			        labels: ["Conservative", "Liberal", "Libertarian", "Green"],
+			        datasets: [{
+			            label: 'Likelihood of Affiliation',
+			            data: [results.Conservative * 100, results.Liberal * 100, results.Libertarian * 100, results.Green * 100],
+			            backgroundColor: [
+			                'rgba(255, 99, 132, 0.2)',
+			                'rgba(54, 162, 235, 0.2)',
+			                'rgba(255, 206, 86, 0.2)',
+			                'rgba(75, 192, 192, 0.2)',
+			            ],
+			            borderColor: [
+			                'rgba(255,99,132,1)',
+			                'rgba(54, 162, 235, 1)',
+			                'rgba(255, 206, 86, 1)',
+			                'rgba(75, 192, 192, 1)',
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
-
-        var options = {
-          title: 'My Daily Activities'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-			// document.write(results)
-		};
+			});
+		});
 });
-
